@@ -61,5 +61,12 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.getElementById('lbsInput').addEventListener('input', function(e){
+      let pounds = e.target.value;
+      document.getElementById('gramsOutput').innerHTML = pounds/0.0022046;
+    });
+  </script>
 </body>
 </html>
