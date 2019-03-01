@@ -14,28 +14,47 @@
       color:#fff;
     }
   </style>
-  <title>Weight Converter</title>
+  <title>Grade Converter</title>
 </head>
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 offset-md-3">
         <h1 class="display-4 text-center mb-3">Grade Converter</h1>
         <form>
           <div class="form-group">
             <input
-            id="lbsInput"
-            type="number"
+            id="ydsInput"
+            type="text"
             class="form-control form-control-lg"
-            placeholder="Enter Pounds..."
+            placeholder="Enter YDS grade... (for example, 5.10c)"
             >
           </div>
         </form>
         <div id="output">
           <div class="card bg-primary mb-2">
             <div class="card-block">
-              <h4>Grams:</h4>
-              <div id="gramsOutput"></div>
+              <h4>French:</h4>
+              <div id="frenchOutput"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="output">
+          <div class="card bg-warning mb-2">
+            <div class="card-block">
+              <h4>In Clear Creek Canyon:</h4>
+              <div id="cccOutput"></div>
+            </div>
+          </div>
+        </div>
+
+
+        <div id="output">
+          <div class="card bg-success mb-2">
+            <div class="card-block">
+              <h4>At Earth Treks Golden:</h4>
+              <div id="etgOutput"></div>
             </div>
           </div>
         </div>
@@ -43,17 +62,8 @@
         <div id="output">
           <div class="card bg-danger mb-2">
             <div class="card-block">
-              <h4>Kilograms:</h4>
-              <div id="kgOutput"></div>
-            </div>
-          </div>
-        </div>
-
-        <div id="output">
-          <div class="card bg-success mb-2">
-            <div class="card-block">
-              <h4>Ounces:</h4>
-              <div id="ozOutput"></div>
+              <h4>At Earth Treks Englewood:</h4>
+              <div id="eteOutput"></div>
             </div>
           </div>
         </div>
@@ -63,9 +73,24 @@
   </div>
 
   <script>
-    document.getElementById('lbsInput').addEventListener('input', function(e){
-      let pounds = e.target.value;
-      document.getElementById('gramsOutput').innerHTML = pounds/0.0022046;
+    document.getElementById('ydsInput').addEventListener('input', function(e){
+      var french = { "5.7":"4", "5.8":"5a", "5.9":"5b", "5.10a":"5c", "5.10b":"6a",
+      "5.10c":"6a+", "5.10d":"6b", "5.11a":"6b+", "5.11b":"6c", "5.11c":"6c+",
+      "5.11d":"7a", "5.12a":"7a+", "5.12b":"7b", "5.12c":"7b+", "5.12d":"7c",
+      "5.13a":"7c+", "5.13b":"8a", "5.13c":"8a+", "5.13d":"8b" }
+      let yds = e.target.value;
+      var v = (french[yds] === undefined) ? "Please type a YDS grade from 5.7 to 5.13d" : french[yds];
+      document.getElementById('frenchOutput').innerHTML = v;
+      var array = Object.keys(french);
+      array.push("5.14a", "5.14a", "5.14a", "5.14a")
+      var index = array.indexOf(yds);
+      var x = (array[index] === undefined) ? "Please type a YDS grade from 5.7 to 5.13d" : array[index + 3];
+      var y = (array[index] === undefined) ? "Please type a YDS grade from 5.7 to 5.13d" : array[index + 2];
+      var z = (array[index] === undefined) ? "Please type a YDS grade from 5.7 to 5.13d" : array[index + 1];
+      document.getElementById('eteOutput').innerHTML = x;
+      document.getElementById('etgOutput').innerHTML = y;
+      document.getElementById('cccOutput').innerHTML = z;
+
     });
   </script>
 </body>
